@@ -1,21 +1,25 @@
 # setup-app.yml
-
+# ansible-playbook playbooks/setup-app.yml --tags upload 
+# ansible-playbook playbooks/setup-app.yml --tags create 
+# ansible-playbook playbooks/setup-app.yml --skip-tags upload 
 ---
   - hosts: webservers
     become: True
     vars:
       path_to_app: "/var/www/html"
     tasks:
-      - name: uploading application files 
+      - name: upload application file
         copy:
           src: ../index.php
           dest: "{{ path_to_app }}"
           mode: 0755
+        tags: upload
 
       - name: creating simple info page
         copy:
           dest: "{{ path_to_app }}/info.php"
           content: "<h1> Info about our webserver {{ ansible_hostname }} </h1>"
+        tags: create
 
       - name:
         command: ls -la {{ path_to_app }}

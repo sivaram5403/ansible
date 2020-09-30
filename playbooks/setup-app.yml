@@ -10,6 +10,13 @@
 
     vars_files:
       - ../vars/secret-variables.yml
+    
+    vars_prompt:
+      - name: "upload_var"
+        prompt: "upload the index.php file ? "
+      
+      - name: "create_var"
+        prompt: "create info.php page ? "
 
     tasks:
 
@@ -21,13 +28,15 @@
         copy:
           src: ../index.php
           dest: "{{ path_to_app }}"
-          mode: 0755
+          mode: 
+        when: upload_var == 'yes'
         tags: upload
 
       - name: creating simple info page
         copy:
           dest: "{{ path_to_app }}/info.php"
           content: "<h1> Info about our webserver {{ ansible_hostname }} </h1>"
+        when: create_var == 'yes'
         tags: create
 
       - name:

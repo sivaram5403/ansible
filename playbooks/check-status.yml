@@ -13,3 +13,4 @@
      - name: this is not fail 
        command: /bin/false
        ignore_errors: yes 
+

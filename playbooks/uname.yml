@@ -1,0 +1,7 @@
+#uname.yml
+---
+  - hosts: webservers:loadbalancers
+    serial: 1
+    tasks:
+      - name: version of the operationg systmes 
+        shell: uname 

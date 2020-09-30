@@ -7,7 +7,16 @@
     become: True
     vars:
       path_to_app: "/var/www/html"
+
+    vars_files:
+      - ../vars/secret-variables.yml
+
     tasks:
+
+      - name: use secret password here 
+        debug:
+          msg: "{{ secret_password }}"
+
       - name: upload application file
         copy:
           src: ../index.php

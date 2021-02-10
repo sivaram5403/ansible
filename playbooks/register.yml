@@ -1,0 +1,14 @@
+---
+- hosts: webservers
+  tasks:
+    - name: create file
+      file:
+        path: /tmp/newfile
+        state: touch
+      register: output
+    - debug: msg=" Register output is {{output}} "
+
+    - name: adding data to file
+      lineinfile:
+        path: /tmp/newfile
+        line: "new data added to file"

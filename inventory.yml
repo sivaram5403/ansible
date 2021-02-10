@@ -1,0 +1,10 @@
+all:
+  children:
+    webservers:
+      hosts:
+        ec2-54-224-74-167.compute-1.amazonaws.com
+        ec2-54-81-206-217.compute-1.amazonaws.com
+
+    loadbalancers:
+      hosts:
+        ec2-34-199-12-155.compute-1.amazonaws.com

@@ -1,0 +1,10 @@
+---
+- hosts: webservers
+  become: yes
+  tasks:
+    - name: edit the file 
+      lineinfile:
+        path: /var/www/html/index.html
+        line: "i'm back"
+      when:
+        - ansible_host == "50.19.151.188"

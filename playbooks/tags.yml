@@ -1,0 +1,26 @@
+---
+- hosts: web
+  become: yes
+  handlers:
+    - name: restart apache
+      service: name=httpd state=restarted
+      listen: "restart apache" 
+  tasks:
+    - name: deploy app binary 
+      copy:
+        src: /home/user/apps/hello
+        dest: /var/www/html/hello
+      tags:
+        - webdeploy
+      notify: "restart apache" 
+- hosts: db
+  become: yes
+  tasks:
+    - name: deploy db script
+      copy:
+        src: /home/user/apps/script.sql
+        dest: /opt/db/scripts/script.sql
+      tags:
+        - dbdeploy
+
+  # ansible-playbook deploy.ym l  --tags webdeploy
